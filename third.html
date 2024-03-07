@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title></title>
+</head>
+<body>
+&lt;html&gt;<br/>
+&lt;head&gt;<br/>
+    <br/>
+    &lt;title&gt;Event Management&lt;/title&gt;<br/>
+     &lt;style&gt;<br/>
+        body {<br/>
+            font&ndash;family: Arial, sans&ndash;serif;<br/>
+            background&ndash;color: lightgreen;<br/>
+            margin: 0;<br/>
+            padding: 0;<br/>
+        }<br/>
+        h1 {<br/>
+            text&ndash;align: center;<br/>
+            color: white;<br/>
+        }<br/>
+        form {<br/>
+            max&ndash;width: 400px;<br/>
+            margin: 20px auto;<br/>
+            padding: 20px;<br/>
+            background&ndash;color: #fff;<br/>
+            border&ndash;radius: 5px;<br/>
+            box&ndash;shadow: 0 0 10px rgba(0, 0, 0, 0.1);<br/>
+        }<br/>
+        label {<br/>
+            display: block;<br/>
+            margin&ndash;bottom: 5px;<br/>
+            font&ndash;weight: bold;<br/>
+        }<br/>
+        input[type=&quot;text&quot;],<br/>
+        input[type=&quot;date&quot;],<br/>
+        textarea {<br/>
+            width: calc(100% &ndash; 12px);<br/>
+            padding: 10px;<br/>
+            margin&ndash;bottom: 15px;<br/>
+            border: 1px solid #ccc;<br/>
+            border&ndash;radius: 4px;<br/>
+            box&ndash;sizing: border&ndash;box;<br/>
+        }<br/>
+        input[type=&quot;submit&quot;] {<br/>
+            background&ndash;color: #4CAF50;<br/>
+            color: white;<br/>
+            padding: 10px 20px;<br/>
+            border: none;<br/>
+            border&ndash;radius: 4px;<br/>
+            cursor: pointer;<br/>
+        }<br/>
+        input[type=&quot;submit&quot;]:hover {<br/>
+            background&ndash;color: #45a049;<br/>
+        }<br/>
+    &lt;/style&gt;<br/>
+&lt;/head&gt;<br/>
+&lt;body&gt;<br/>
+        &lt;h1 align=&quot;center&quot;&gt;EVENTS&lt;/h1&gt;<br/>
+        &lt;form action=&quot;&quot; method=&quot;POST&quot;&gt;<br/>
+           <br/>
+    &lt;form action=&quot;&quot; method=&quot;post&quot;&gt;<br/>
+  &lt;label for=&quot;event_name&quot;&gt;Name:&lt;/label&gt;<br/>
+  &lt;input type=&quot;text&quot; id=&quot;event_name&quot; name=&quot;event_name&quot; required&gt;&lt;br&gt;&lt;br&gt;<br/>
+  <br/>
+  &lt;label for=&quot;event_description&quot;&gt;Description:&lt;/label&gt;<br/>
+  &lt;textarea id=&quot;event_description&quot; name=&quot;event_description&quot; required&gt;&lt;/textarea&gt;&lt;br&gt;&lt;br&gt;<br/>
+  <br/>
+  &lt;label for=&quot;event_date&quot;&gt;Date:&lt;/label&gt;<br/>
+  &lt;input type=&quot;date&quot; id=&quot;event_date&quot; name=&quot;event_date&quot; required&gt;&lt;br&gt;&lt;br&gt;<br/>
+  <br/>
+  &lt;label for=&quot;event_location&quot;&gt;Location:&lt;/label&gt;<br/>
+  &lt;input type=&quot;text&quot; id=&quot;event_location&quot; name=&quot;event_location&quot; required&gt;&lt;br&gt;&lt;br&gt;<br/>
+  <br/>
+  &lt;input type=&quot;submit&quot; value=&quot;Add Event&quot;&gt;<br/>
+&lt;/form&gt;<br/>
+        &lt;/form&gt;<br/>
+    <br/>
+&lt;/body&gt;<br/>
+&lt;/html&gt;<br/>
+<br/>
+&lt;?php<br/>
+$servername = &quot;localhost&quot;;<br/>
+$username = &quot;root&quot;;<br/>
+$password = &quot;&quot;;<br/>
+$dbname = &quot;first&quot;;<br/>
+<br/>
+$conn=mysqli_connect($servername,$username,$password,$dbname);<br/>
+if(mysqli_error($conn))<br/>
+{<br/>
+    die(&quot;Connection failed&quot;.mysqli_error($conn));<br/>
+}<br/>
+if($_SERVER[&quot;REQUEST_METHOD&quot;]==&quot;POST&quot;)<br/>
+{<br/>
+$EventName = $_POST[&#39;event_name&#39;];<br/>
+$EventDescription = $_POST[&#39;event_description&#39;];<br/>
+$EventDate = $_POST[&#39;event_date&#39;];<br/>
+$EventLocation = $_POST[&#39;event_location&#39;];<br/>
+<br/>
+$sql=&quot;INSERT INTO re(name,description,date,location)VALUES(&#39;$EventName&#39;,&#39;$EventDescription&#39;,&#39;$EventDate&#39;,&#39;$EventLocation&#39;)&quot;;<br/>
+if(mysqli_query($conn,$sql)==TRUE){<br/>
+echo &quot;&lt;script&gt; alert(&#39;Event added successfully!&#39;);window.location.href=&#39;button.php&#39;;&lt;/script&gt;&quot;;<br/>
+}<br/>
+else {<br/>
+  echo &quot;Error: &quot; . $sql . &quot;&lt;br&gt;&quot; . $mysqli_error;<br/>
+}<br/>
+}<br/>
+?&gt;<br/>
+</body></html>

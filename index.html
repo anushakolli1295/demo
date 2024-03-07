@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title></title>
+</head>
+<body>
+<br/>
+&lt;html&gt;<br/>
+&lt;head&gt;<br/>
+    <br/>
+    &lt;h1 align=&quot;center&quot;&gt;COLLEGE FEST MANAGEMENT SYSTEM&lt;/h1&gt;<br/>
+ &lt;style&gt;<br/>
+        body {<br/>
+            font&ndash;family: Arial, sans&ndash;serif;<br/>
+            background&ndash;color: white;<br/>
+            margin: 0;<br/>
+            padding: 0;<br/>
+        }<br/>
+   <br/>
+<br/>
+        h2 {<br/>
+            color: #333;<br/>
+        }<br/>
+        form {<br/>
+            background&ndash;color: pink;<br/>
+            padding: 20px;<br/>
+            border&ndash;radius: 5px;<br/>
+            width: 300px;<br/>
+            margin: 50px auto;<br/>
+            box&ndash;shadow: 0 0 10px rgba(0, 0, 0, 0.1);<br/>
+        }<br/>
+        input[type=&quot;text&quot;],<br/>
+        input[type=&quot;email&quot;],<br/>
+        input[type=&quot;password&quot;] {<br/>
+            width: 100%;<br/>
+            padding: 10px;<br/>
+            margin&ndash;bottom: 15px;<br/>
+            border: 1px solid #ccc;<br/>
+            border&ndash;radius: 4px;<br/>
+            box&ndash;sizing: border&ndash;box;<br/>
+        }<br/>
+        input[type=&quot;submit&quot;] {<br/>
+            background&ndash;color: #4CAF50;<br/>
+            color: white;<br/>
+            padding: 10px 20px;<br/>
+            border: none;<br/>
+            border&ndash;radius: 4px;<br/>
+            cursor: pointer;<br/>
+        }<br/>
+        input[type=&quot;submit&quot;]:hover {<br/>
+            background&ndash;color: #45a049;<br/>
+        }<br/>
+    &lt;/style&gt;<br/>
+&lt;/head&gt;<br/>
+&lt;body&gt;<br/>
+    &lt;h2 align=&quot;center&quot;&gt;USER REGISTRATION&lt;/h2&gt;<br/>
+    &lt;form action=&quot;one.php&quot; method=&quot;post&quot;&gt;<br/>
+&nbsp;&nbsp;&nbsp;NAME:&lt;input type=&quot;text&quot; name=&quot;name&quot; required&gt;&lt;br&gt;&lt;br&gt;<br/>
+        EMAIL:&lt;input type=&quot;email&quot; name=&quot;email&quot; required&gt;&lt;br&gt;&lt;br&gt;<br/>
+        USERNAME:&lt;input type=&quot;text&quot; name=&quot;username&quot; required&gt;&lt;br&gt;&lt;br&gt;<br/>
+        PASSWORD:&lt;input type=&quot;password&quot; name=&quot;password&quot; required&gt;&lt;br&gt;&lt;br&gt;<br/>
+        &lt;input type=&quot;submit&quot; name=&quot;Register&quot;&gt;<br/>
+    &lt;/form&gt;<br/>
+&lt;/body&gt;<br/>
+&lt;/html&gt;<br/>
+<br/>
+&lt;?php<br/>
+$servername=&quot;localhost&quot;;<br/>
+$username=&quot;root&quot;;<br/>
+$password=&quot;&quot;;<br/>
+$dbname=&quot;first&quot;;<br/>
+$conn=mysqli_connect($servername,$username,$password,$dbname);<br/>
+if(mysqli_error($conn))<br/>
+{<br/>
+    die(&quot;Connection failed&quot;.mysqli_error($conn));<br/>
+}<br/>
+if($_SERVER[&quot;REQUEST_METHOD&quot;]==&quot;POST&quot;)<br/>
+{<br/>
+$name=$_POST[&quot;name&quot;];<br/>
+$email=$_POST[&quot;email&quot;];<br/>
+$username=$_POST[&quot;username&quot;];<br/>
+$password=$_POST[&quot;password&quot;];<br/>
+$sql=&quot;INSERT INTO review(Name,Email,Username,Password)VALUES(&#39;$name&#39;,&#39;$email&#39;,&#39;$username&#39;,&#39;$password&#39;)&quot;;<br/>
+<br/>
+if(mysqli_query($conn,$sql)==True)<br/>
+{<br/>
+    echo &quot;&lt;script&gt; alert(&#39;Registration successful!&#39;); window.location.href=&#39;login.php&#39;;&lt;/script&gt;&quot;;<br/>
+    exit;<br/>
+}<br/>
+else<br/>
+{<br/>
+    echo &quot;&lt;script&gt;alert(&#39;Registration unsuccessful!&#39;); window.location.href=&#39;login.php&#39;;&lt;/script&gt;&quot;;<br/>
+    exit;<br/>
+}<br/>
+}<br/>
+?&gt;</body></html>

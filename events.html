@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title></title>
+</head>
+<body>
+&lt;html&gt;<br/>
+&lt;head&gt;<br/>
+  &lt;style&gt;<br/>
+    body {<br/>
+      font&ndash;family: Arial, sans&ndash;serif;<br/>
+      background&ndash;color: white;<br/>
+      margin: 0;<br/>
+      padding: 20px;<br/>
+    }<br/>
+<br/>
+    table {<br/>
+      width: 100%;<br/>
+      border&ndash;collapse: collapse;<br/>
+    }<br/>
+<br/>
+    th, td {<br/>
+      border: 1px solid #ddd;<br/>
+      padding: 8px;<br/>
+      text&ndash;align: left;<br/>
+    }<br/>
+<br/>
+    th {<br/>
+      background&ndash;color: #4CAF50;<br/>
+      color: white;<br/>
+    }<br/>
+<br/>
+    tr:nth&ndash;child(even) {<br/>
+      background&ndash;color: #f2f2f2;<br/>
+    }<br/>
+<br/>
+    tr:hover {<br/>
+      background&ndash;color: #ddd;<br/>
+    }<br/>
+.apply&ndash;link {<br/>
+      position: absolute;<br/>
+      bottom: 20px;<br/>
+      left: 50%;<br/>
+      transform: translateX(&ndash;50%);<br/>
+      background&ndash;color: #007bff;<br/>
+      color: white;<br/>
+      padding: 10px 20px;<br/>
+      border&ndash;radius: 5px;<br/>
+      text&ndash;decoration: none;<br/>
+    }<br/>
+<br/>
+    .apply&ndash;link:hover {<br/>
+      background&ndash;color: #0056b3;<br/>
+    }<br/>
+  &lt;/style&gt;<br/>
+&lt;/head&gt;<br/>
+&lt;body&gt;<br/>
+&lt;?php<br/>
+$servername = &quot;localhost&quot;;<br/>
+$username = &quot;root&quot;;<br/>
+$password = &quot;&quot;;<br/>
+$dbname = &quot;first&quot;;<br/>
+$conn = mysqli_connect($servername, $username, $password, $dbname);<br/>
+if (mysqli_error($conn)) {<br/>
+  die(&quot;Connection failed: &quot; . mysqli_error($conn));<br/>
+}<br/>
+$sql = &quot;SELECT * FROM event&quot;;<br/>
+$result = mysqli_query($conn, $sql);<br/>
+if (mysqli_num_rows($result) &gt; 0) {<br/>
+  echo &quot;&lt;table&gt;&quot;;<br/>
+  echo &quot;&lt;tr&gt;<br/>
+    &lt;th&gt;Name&lt;/th&gt;<br/>
+    &lt;th&gt;Date&lt;/th&gt;<br/>
+    &lt;th&gt;Slot&lt;/th&gt;<br/>
+    &lt;th&gt;Location&lt;/th&gt;<br/>
+    &lt;/tr&gt;&quot;;<br/>
+  while ($row = mysqli_fetch_array($result)) {<br/>
+    echo &quot;&lt;tr&gt;<br/>
+    &lt;td&gt;&quot;.$row[&quot;Name&quot;].&quot;&lt;/td&gt;<br/>
+    &lt;td&gt;&quot;.$row[&quot;Date&quot;].&quot;&lt;/td&gt;<br/>
+    &lt;td&gt;&quot;.$row[&quot;Slot&quot;].&quot;&lt;/td&gt;<br/>
+    &lt;td&gt;&quot;.$row[&quot;Location&quot;].&quot;&lt;/td&gt;<br/>
+    &lt;/tr&gt;&quot;;<br/>
+  }<br/>
+  echo &quot;&lt;/table&gt;&quot;;<br/>
+} else {<br/>
+  echo &quot;No record&quot;;<br/>
+}<br/>
+?&gt;<br/>
+&lt;a href=&quot;regii.php&quot; class=apply&ndash;link&gt;REGISTER FOR THE EVENT&lt;/a&gt;<br/>
+&lt;/body&gt;<br/>
+&lt;/html&gt;</body></html>

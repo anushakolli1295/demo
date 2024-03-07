@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title></title>
+</head>
+<body>
+&lt;html&gt;<br/>
+&lt;body&gt;<br/>
+&lt;h1 align=&quot;center&quot;&gt;COLLEGE FEST MANAGEMENT&lt;/h1&gt;<br/>
+&lt;h2 align=&quot;center&quot;&gt;REGISTRATION!!&lt;/h2&gt;<br/>
+&lt;style&gt;<br/>
+    body {<br/>
+      font&ndash;family: Arial, sans&ndash;serif;<br/>
+      background&ndash;color: radium;<br/>
+      margin: 0;<br/>
+      padding: 0;<br/>
+    }<br/>
+    form {<br/>
+      width: 300px;<br/>
+      margin: 20px auto;<br/>
+      background&ndash;color: #fff;<br/>
+      padding: 20px;<br/>
+      border&ndash;radius: 8px;<br/>
+      box&ndash;shadow: 0 0 10px rgba(0, 0, 0, 0.1);<br/>
+    }<br/>
+    input[type=&quot;text&quot;],<br/>
+    input[type=&quot;email&quot;],<br/>
+    select {<br/>
+      width: calc(100% &ndash; 20px);<br/>
+      padding: 10px;<br/>
+      margin: 5px 0;<br/>
+      border: 1px solid #ccc;<br/>
+      border&ndash;radius: 5px;<br/>
+      box&ndash;sizing: border&ndash;box;<br/>
+    }<br/>
+    input[type=&quot;submit&quot;] {<br/>
+      width: calc(100% &ndash; 20px);<br/>
+      background&ndash;color: #4CAF50;<br/>
+      color: #fff;<br/>
+      padding: 10px;<br/>
+      border: none;<br/>
+      border&ndash;radius: 5px;<br/>
+      cursor: pointer;<br/>
+      margin&ndash;top: 10px;<br/>
+    }<br/>
+    input[type=&quot;submit&quot;]:hover {<br/>
+      background&ndash;color: #45a049;<br/>
+    }<br/>
+    table {<br/>
+      width: 100%;<br/>
+      border&ndash;collapse: collapse;<br/>
+      margin&ndash;top: 20px;<br/>
+    }<br/>
+    th, td {<br/>
+      border: 1px solid #ddd;<br/>
+      padding: 8px;<br/>
+      text&ndash;align: left;<br/>
+    }<br/>
+    th {<br/>
+      background&ndash;color: #f2f2f2;<br/>
+    }<br/>
+  &lt;/style&gt;<br/>
+&lt;form method=&quot;post&quot;&gt;<br/>
+Name:&lt;input type=&quot;text&quot; name=&quot;name&quot; required&gt;&lt;br&gt;&lt;br&gt;<br/>
+Email:&lt;br&gt;&lt;input type=&quot;mail&quot; name=&quot;email&quot; required&gt;&lt;br&gt;&lt;br&gt;<br/>
+Event:&lt;select name=&quot;event&quot; required&gt;<br/>
+&lt;option value=&quot;Dance&quot;&gt;dance&lt;/option&gt;<br/>
+&lt;option value=&quot;literary&quot;&gt;literary&lt;/option&gt;<br/>
+&lt;option value=&quot;sports&quot;&gt;sports&lt;/option&gt;<br/>
+&lt;option value=&quot;singing&quot;&gt;singing&lt;/option&gt;<br/>
+&lt;option value=&quot;treasurehunt&quot;&gt;treasurehunt&lt;/option&gt;<br/>
+&lt;option value=&quot;painting&quot;&gt;painting&lt;/option&gt;<br/>
+<br/>
+&lt;/select&gt;<br/>
+&lt;input type=&quot;submit&quot; name=&quot;Submit&quot;&gt;<br/>
+&lt;/form&gt;<br/>
+&lt;/body&gt;<br/>
+&lt;/html&gt;<br/>
+&lt;?php<br/>
+$servername=&quot;localhost&quot;;<br/>
+$username=&quot;root&quot;;<br/>
+$password=&quot;&quot;;<br/>
+$dbname=&quot;first&quot;;<br/>
+$conn=mysqli_connect($servername,$username,$password,$dbname);<br/>
+if(mysqli_error($conn))<br/>
+{<br/>
+    die(&quot;Connection failed&quot;.mysqli_error($conn));<br/>
+}<br/>
+if($_SERVER[&quot;REQUEST_METHOD&quot;]==&quot;POST&quot;)<br/>
+{<br/>
+$name=$_POST[&quot;name&quot;];<br/>
+$email=$_POST[&quot;email&quot;];<br/>
+$event=$_POST[&quot;event&quot;];<br/>
+$sql= &quot;insert into register(name,email,event)VALUES(&#39;$name&#39;,&#39;$email&#39;,&#39;$event&#39;)&quot;;<br/>
+if(mysqli_query($conn,$sql)==True)<br/>
+{<br/>
+    echo &quot;&lt;script&gt; alert(&#39;Registration successful!&#39;);&lt;/script&gt;&quot;;<br/>
+    exit;<br/>
+}<br/>
+else<br/>
+{<br/>
+    echo &quot;&lt;script&gt;alert(&#39;Registration unsuccessful!&#39;);&lt;/script&gt;&quot;;<br/>
+    exit;<br/>
+}<br/>
+$s1=&quot;select * from register where name=&#39;$name&#39; mail=&#39;$email&#39; event=&#39;$event&#39;&quot;;<br/>
+$res=mysqli_query($conn,$s1);<br/>
+if(mysqli_num_rows($res)&gt;0){<br/>
+echo &quot;&lt;table border=&#39;1&#39;&gt;&quot;;<br/>
+echo &quot;&lt;tr&gt;<br/>
+&lt;th&gt;Name&lt;/th&gt;<br/>
+&lt;th&gt;Email&lt;/th&gt;<br/>
+&lt;th&gt;Event&lt;/th&gt;<br/>
+&lt;/tr&gt;&quot;;<br/>
+while($row=mysqli_fetch_array($res)){<br/>
+echo &quot;&lt;tr&gt;<br/>
+&lt;td&gt;&quot; . $row[&quot;name&quot;] . &quot;&lt;/td&gt;<br/>
+&lt;td&gt;&quot; . $row[&quot;email&quot;] . &quot;&lt;/td&gt;<br/>
+&lt;td&gt;&quot; . $row[&quot;event&quot;] . &quot;&lt;/td&gt;<br/>
+&lt;/tr&gt;&quot;;<br/>
+}<br/>
+echo &quot;&lt;/table&gt;&quot;;<br/>
+}<br/>
+else{<br/>
+echo &quot;No records&quot;;<br/>
+}<br/>
+}<br/>
+?&gt;</body></html>
